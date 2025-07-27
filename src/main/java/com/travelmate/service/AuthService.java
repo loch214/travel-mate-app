@@ -39,20 +39,21 @@ public class AuthService {
 
     /**
      * Authenticates a user and establishes a session.
-     * @param loginRequest The user's login credentials.
      */
     public void login(LoginRequest loginRequest) {
-        // This uses Spring Security's manager to validate the username and password.
-        // If credentials are bad, it will throw an exception.
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         loginRequest.getEmail(),
                         loginRequest.getPassword()
                 )
         );
-
-        // If authentication is successful, we store the user's session details
-        // in the SecurityContextHolder. This is how Spring knows the user is logged in.
         SecurityContextHolder.getContext().setAuthentication(authentication);
+    }
+
+    /**
+     * Logs the current user out by clearing the security context.
+     */
+    public void logout() {
+        SecurityContextHolder.clearContext();
     }
 }

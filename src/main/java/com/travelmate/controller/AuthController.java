@@ -35,8 +35,15 @@ public class AuthController {
             authService.login(loginRequest);
             return ResponseEntity.ok(new LoginResponse("Login successful!"));
         } catch (Exception e) {
-            // This catches bad credentials exceptions from Spring Security
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new LoginResponse("Invalid email or password."));
         }
+    }
+
+    // --- THIS METHOD HAS BEEN SIMPLIFIED ---
+    @PostMapping("/logout")
+    public ResponseEntity<String> logout() {
+        // We now simply call our service method to handle the logout.
+        authService.logout();
+        return ResponseEntity.ok("Logout successful!");
     }
 }
