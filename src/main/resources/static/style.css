@@ -1,0 +1,218 @@
+/* General Body and Layout */
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    margin: 0;
+    color: #333;
+    background-color: #f8f8f8;
+}
+
+.content-wrapper {
+    display: flex;
+    height: calc(100vh - 70px); /* Full height minus header */
+    padding: 40px; /* NEW: Adds spacing around the entire content area */
+    gap: 40px; /* NEW: Creates a gap between the ride widget and the map */
+    box-sizing: border-box; /* IMPORTANT: Ensures padding is included in the element's total height/width */
+}
+
+/* Header and Navigation */
+.main-header {
+    background-color: black;
+    color: white;
+    padding: 0 40px;
+    height: 70px;
+}
+
+.main-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.nav-logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: #aaa;
+}
+
+.auth-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 16px;
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.auth-btn:hover {
+    background-color: #333;
+}
+
+.auth-btn-primary {
+    background-color: white;
+    color: black;
+}
+
+.auth-btn-primary:hover {
+    background-color: #eee;
+}
+
+/* Ride Widget */
+.ride-widget {
+    flex-basis: 400px;
+    flex-shrink: 0; /* Prevents the widget from shrinking */
+    background-color: white;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    z-index: 10;
+}
+
+.ride-widget h1 {
+    font-size: 36px;
+    margin-top: 0;
+}
+
+.ride-widget .location-inputs input {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 15px;
+    border: none;
+    background-color: #eee;
+    border-radius: 8px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.cta-btn {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    background-color: black;
+    color: white;
+    font-size: 18px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+/* Map */
+.map-container {
+    flex-grow: 1;
+    height: 100%;
+    border-radius: 8px; /* NEW: This rounds the corners of the map container */
+    overflow: hidden; /* NEW: Ensures the map tiles don't poke out of the rounded corners */
+}
+
+/* Modal Styling */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: none; /* Hidden by default */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 40px;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 400px;
+    position: relative;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 28px;
+    font-weight: bold;
+    color: #aaa;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.modal-content h2 {
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 25px;
+}
+
+.modal-content form input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.modal-content form button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 4px;
+    background-color: black;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.form-switcher {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+.form-switcher a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+#formMessage {
+    margin-top: 15px;
+    padding: 10px;
+    border-radius: 4px;
+    font-weight: bold;
+    text-align: center;
+}
+
+#formMessage.success {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+#formMessage.error {
+    background-color: #f8d7da;
+    color: #721c24;
+}
