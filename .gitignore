@@ -1,3 +1,7 @@
+# Generated database files
+/data/
+
+# Original Content Below
 HELP.md
 target/
 .mvn/wrapper/maven-wrapper.jar
