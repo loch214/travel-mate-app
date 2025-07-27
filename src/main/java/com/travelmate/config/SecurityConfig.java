@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.logout.HttpStatusReturningLogoutSuccessHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -29,17 +30,22 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        // Public assets and pages
                         .requestMatchers("/", "/index.html", "/style.css", "/script.js", "/images/**").permitAll()
-                        // Public API endpoints for authentication
                         .requestMatchers("/api/auth/register", "/api/auth/login").permitAll()
-                        // H2 console for development
                         .requestMatchers("/h2-console/**").permitAll()
-                        // Any other request must be authenticated
                         .anyRequest().authenticated()
+                )
+                // --- NEW LOGOUT CONFIGURATION ---
+                .logout(logout -> logout
+                        // This is the URL our frontend will call to log out
+                        .logoutUrl("/api/auth/logout")
+                        // This makes sure that upon successful logout, the server just returns a 200 OK status,
+                        // which is perfect for our JavaScript fetch call.
+                        .logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler())
+                        // This invalidates the user's session cookie, which is crucial for security
+                        .deleteCookies("JSESSIONID")
                 );
 
-        // Required for H2 console frames to be displayed
         http.headers(headers -> headers.frameOptions(frameOptions -> frameOptions.sameOrigin()));
 
         return http.build();

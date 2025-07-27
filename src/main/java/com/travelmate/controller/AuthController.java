@@ -39,11 +39,6 @@ public class AuthController {
         }
     }
 
-    // --- THIS METHOD HAS BEEN SIMPLIFIED ---
-    @PostMapping("/logout")
-    public ResponseEntity<String> logout() {
-        // We now simply call our service method to handle the logout.
-        authService.logout();
-        return ResponseEntity.ok("Logout successful!");
-    }
+    // The custom /logout POST mapping has been completely removed.
+    // Spring Security will now handle this endpoint automatically.
 }

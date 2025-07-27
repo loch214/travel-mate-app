@@ -20,26 +20,18 @@ public class AuthService {
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
 
-    /**
-     * Registers a new passenger.
-     */
     public void register(String name, String email, String password) {
         if (userRepository.findByEmail(email).isPresent()) {
             throw new IllegalStateException("Email already in use.");
         }
-
         User newUser = new User();
         newUser.setName(name);
         newUser.setEmail(email);
         newUser.setPassword(passwordEncoder.encode(password));
         newUser.setRole(UserRole.PASSENGER);
-
         userRepository.save(newUser);
     }
 
-    /**
-     * Authenticates a user and establishes a session.
-     */
     public void login(LoginRequest loginRequest) {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
@@ -50,10 +42,6 @@ public class AuthService {
         SecurityContextHolder.getContext().setAuthentication(authentication);
     }
 
-    /**
-     * Logs the current user out by clearing the security context.
-     */
-    public void logout() {
-        SecurityContextHolder.clearContext();
-    }
+    // The custom logout() method has been completely removed.
+    // Spring Security handles clearing the context automatically now.
 }
